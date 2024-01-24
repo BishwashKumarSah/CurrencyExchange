@@ -1,5 +1,9 @@
 import { useId } from "react";
-function InputButton() {
+function InputButton({
+  setCurrencyType,
+  currencyType = "usd",
+  currencyOptions = [],
+}) {
   const amountInputId = useId();
   return (
     <>
@@ -13,17 +17,21 @@ function InputButton() {
             className="label__input"
           />
         </div>
-        
+
         <div className="input__dropdown">
           <p className="currency__p">Currency Type</p>
           <select
             name="currencyOptions"
             id=""
             className="label__input select__input"
+            value={currencyType}
+            onChange={(e) => setCurrencyType && setCurrencyType(e.target.value)}
           >
-            <option value="">USD</option>
-            <option value="">RS</option>
-            <option value="">INR</option>
+            {currencyOptions && currencyOptions.map((currency, index) => (
+              <option key={index} value={currency}>
+                {currency}
+              </option>
+            ))}
           </select>
         </div>
       </div>
