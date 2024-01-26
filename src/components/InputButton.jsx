@@ -3,6 +3,8 @@ function InputButton({
   setCurrencyType,
   currencyType = "usd",
   currencyOptions = [],
+  originalAmount,
+  onOriginalAmountChange,
 }) {
   const amountInputId = useId();
   return (
@@ -12,9 +14,10 @@ function InputButton({
           <label htmlFor={amountInputId}>Label change</label>
           <input
             type="number"
-            id={amountInputId}
-            min={0}
+            disabled = {false}
             className="label__input"
+            value={originalAmount}
+            onChange={(e) => onOriginalAmountChange && onOriginalAmountChange(Number(e.target.value))}
           />
         </div>
 
@@ -27,11 +30,12 @@ function InputButton({
             value={currencyType}
             onChange={(e) => setCurrencyType && setCurrencyType(e.target.value)}
           >
-            {currencyOptions && currencyOptions.map((currency, index) => (
-              <option key={index} value={currency}>
-                {currency}
-              </option>
-            ))}
+            {currencyOptions &&
+              currencyOptions.map((currency, index) => (
+                <option key={index} value={currency}>
+                  {currency}
+                </option>
+              ))}
           </select>
         </div>
       </div>

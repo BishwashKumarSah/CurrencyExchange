@@ -6,8 +6,13 @@ import useCurrencyInfo from "./hooks/useCurrencyInfo.js";
 function App() {
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
+  const [originalAmount,setOriginalAmount] = useState('');
+
+
   const currencyType = useCurrencyInfo("usd");
   const currencyOptions = Object.keys(currencyType);
+
+
   const handleSwap = () => {};
   const handleConvert = () => {};
   return (
@@ -21,7 +26,10 @@ function App() {
             currencyType={from}
             setCurrencyType={(currency) => setFrom(currency)}
             currencyOptions={currencyOptions}
+            originalAmount = {originalAmount}
+            onOriginalAmountChange = {(amount) => setOriginalAmount(amount) }
           />
+          { console.log(originalAmount)}
           <div className="swapBtn">
             <button onClick={handleSwap} className="btn__swap">
               SWAP
