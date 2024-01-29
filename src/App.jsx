@@ -9,7 +9,7 @@ function App() {
   const [originalAmount,setOriginalAmount] = useState('');
 
 
-  const currencyType = useCurrencyInfo("usd");
+  const currencyType = useCurrencyInfo(from);
   const currencyOptions = Object.keys(currencyType);
 
 
@@ -38,7 +38,9 @@ function App() {
         </div>
 
         <div className="input__container__div">
-          <InputButton />
+          <InputButton 
+
+          />
         </div>
         <div className="convert__Btn">
           <button className="convertBtn" onClick={handleConvert}>
@@ -47,7 +49,7 @@ function App() {
         </div>
       </main>
       <footer className="footer">
-        &copy; {new Date().getFullYear()} Bishwash • Built with React
+        &copy; {new Date().getFullYear()} Bishwash • Built with ReactJS
       </footer>
     </>
   );
