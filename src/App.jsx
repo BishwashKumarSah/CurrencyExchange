@@ -7,18 +7,27 @@ function App() {
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
   const [originalAmount,setOriginalAmount] = useState('');
+  const [convertedAmount,setConvertedAmount] = useState('');
 
-
-  const currencyType = useCurrencyInfo(from);
+  const currencyType = useCurrencyInfo(from);  
   const currencyOptions = Object.keys(currencyType);
 
 
-  const handleSwap = () => {};
-  const handleConvert = () => {};
+  const handleSwap = () => {
+    setFrom(to);
+    setTo(from);
+    setOriginalAmount(convertedAmount);
+    setConvertedAmount(originalAmount)
+  };
+
+
+  const handleConvert = () => {
+    let calculatedAmount = originalAmount * currencyType[`${to}`]
+    setConvertedAmount(calculatedAmount);
+  };
   return (
     <>
-      <h1>Currency Exchange</h1>
-      {currencyType && console.log(currencyType)}
+      <h1 id="currency__title">Currency Exchange</h1>      
       <main className="main">
         <div className="first__input__container input__container__div">
           <InputButton
@@ -28,6 +37,7 @@ function App() {
             currencyOptions={currencyOptions}
             originalAmount = {originalAmount}
             onOriginalAmountChange = {(amount) => setOriginalAmount(amount) }
+            title = {"from"}
           />
           { console.log(originalAmount)}
           <div className="swapBtn">
@@ -39,7 +49,12 @@ function App() {
 
         <div className="input__container__div">
           <InputButton 
-
+            currencyType={to}
+            currencyOptions={currencyOptions}
+            setCurrencyType={(currency) => setTo(currency)}
+            disabled={true}
+            originalAmount={convertedAmount}
+            title = {"to"}
           />
         </div>
         <div className="convert__Btn">

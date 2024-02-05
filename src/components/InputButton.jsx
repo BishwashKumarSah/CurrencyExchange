@@ -1,5 +1,7 @@
 import { useId } from "react";
 function InputButton({
+  title,
+  disabled=false,
   setCurrencyType,
   currencyType = "usd",
   currencyOptions = [],
@@ -11,7 +13,7 @@ function InputButton({
     <>
       <div className={` input__container`}>
         <div className="input__value">
-          <label htmlFor={amountInputId}>Label change</label>
+          <label htmlFor={amountInputId}>{title.toUpperCase()}</label>
           <input
           id={amountInputId}
             type="number"
@@ -19,6 +21,7 @@ function InputButton({
             className="label__input"
             value={originalAmount}
             onChange={(e) => onOriginalAmountChange && onOriginalAmountChange(Number(e.target.value))}
+            disabled = {disabled}
           />
         </div>
 
